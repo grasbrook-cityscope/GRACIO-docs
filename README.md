@@ -26,7 +26,7 @@ The mapping from the integer type stored in the grid to the actual dictionary of
 
 That means we need:
 - a database storing property dictionaries to the hashes
-- a service translating hashes to dictionaries and vice-versa, so other software components (front-end, simulation modules) don't have to know the database structure
+- a service translating hashes to dictionaries and vice-versa, so other software components (front-end, simulation modules) don't have to know the database structure or hashing method
 
 Also, the names and the possible values and the conditions of properties have to be specifically defined and immutable! Otherwise the front-end doesn't know what UI-elements to display and the simulation models don't know what values they can work with.
 
@@ -35,9 +35,15 @@ Also, the names and the possible values and the conditions of properties have to
 ## To Do
 
 ### specification
+- make a more pretty schematic
 - define user-changeble parameters (see "Cell Properties" above)
 - figure out architecture for hashing properties
-- decide on wether GeoJSON grids contain properties or if they should be obtained from the grid array instead (reasoning: geoJSONs get really big, might make sense to only create on at startup and get/send data only on index-referenced-grid basis)
+- decide on wether GeoJSON grids contain properties or if they should be obtained from the grid array instead (reasoning: geoJSONs get really big, might make sense to only create once at startup and get/send data (cell types) only on index-referenced-grid basis)
+
+### property storage
+- where do be put this? CityIO?
+- decide on hashing procedure
+- define unified translation service
 
 ### front-end
 by Till
@@ -50,6 +56,7 @@ by Yasushi
 - one dataset for each user
 - authenticating users
 - keep previous states of grid?
+- prevent people from overwriting stuff they should not be changing. I.e. user only changes grid cell types, simulation modules only write their output, nowhere else...
 
 ### Simulation modules
 - define required parameters
