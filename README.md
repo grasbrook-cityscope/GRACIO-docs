@@ -4,7 +4,7 @@ Repo for documentation and specification of GRACIO/Grasbrook CityScopes
 
 ## Description
 
-...
+This page is for collecting all overarching specification and documentation of the combined but dispersed endeavours of building a CityScope for the Grasbrook competition. Interfaces of the infrastructures are defined here, as well as general to-dos and responsibilities.
 
 ## Infrastracture
 
@@ -40,11 +40,13 @@ Also, the names and the possible values and the conditions of properties have to
 - decide on wether GeoJSON grids contain properties or if they should be obtained from the grid array instead (reasoning: geoJSONs get really big, might make sense to only create on at startup and get/send data only on index-referenced-grid basis)
 
 ### front-end
+by Till
 - select grid cells
 - change params for grid cells
 - previous states of grid?
 
 ### CityIO
+by Yasushi
 - one dataset for each user
 - authenticating users
 - keep previous states of grid?
@@ -52,5 +54,5 @@ Also, the names and the possible values and the conditions of properties have to
 ### Simulation modules
 - define required parameters
 - define inferred and assumed parameters
-- make noise simulation interface nicely
+- make noise simulation interface nicely (Andre)
 - write more
