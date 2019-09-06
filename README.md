@@ -65,3 +65,12 @@ by Yasushi
 - make noise simulation interface nicely (Andre)
 - write more
 - how to trigger these to run?
+
+### Open Questions
+- Do we provide import tools?
+
+### Deployment
+- User manual
+- host the front-end
+- host the back-end
+- distribute access codes
