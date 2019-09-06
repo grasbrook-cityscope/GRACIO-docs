@@ -30,7 +30,7 @@ That means we need:
 
 Also, the names and the possible values and the conditions of properties have to be specifically defined and immutable! Otherwise the front-end doesn't know what UI-elements to display and the simulation models don't know what values they can work with.
 
-[Draft for possible properties](https://docs.google.com/spreadsheets/d/1DOxu__JDZzfLnyQFTfZ7T8ndZIsdYotxPbvtF2Q_o_I/edit#gid=0)
+[Draft for possible properties](files/properties.csv)
 
 ## To Do
 
