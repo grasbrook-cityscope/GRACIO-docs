@@ -50,6 +50,7 @@ by Till
 - select grid cells
 - change params for grid cells
 - previous states of grid?
+- trigger simulations
 
 ### CityIO
 by Yasushi
@@ -63,3 +64,4 @@ by Yasushi
 - define inferred and assumed parameters
 - make noise simulation interface nicely (Andre)
 - write more
+- how to trigger these to run?
