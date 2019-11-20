@@ -124,16 +124,17 @@ if __name__ == "__main__":
         {"bld_numLevels":34,"bld_useGround":"office","bld_useUpper":"office","type":"building"}]
     
     # change_header("grasbrook_test","mapping/type",mapping)
+    
+    # grid in front-end: 78*44
     # change_header("grasbrook_test","spatial/ncols",78)
     # change_header("grasbrook_test","spatial/nrows",43)
 
-    # grid in front-end: 78*44
     # fill_grid("grasbrook_test")
 
     # upper left corner of grid in front-end: 53.53764806145533 10.00736954095224
     # change_header("grasbrook_test","spatial/latitude",53.53764806145533)
     # change_header("grasbrook_test","spatial/longitude",10.00736954095224)
-    # bottom left corner of grid in front-end 53.526354, 10.016304
+    # bottom right corner of grid in front-end 53.526354, 10.016304
     # change_header("grasbrook_test","spatial/latitude",53.526354)
     # change_header("grasbrook_test","spatial/longitude",10.016304)
     
