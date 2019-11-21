@@ -1,4 +1,6 @@
-## Current data format for cityIO as used in CSL
+# Current data format for cityIO as used in CSL
+
+## grid
 
 Grid is an array (number of elements = "header/spatial/ncols" * "header/spatial/nrows".
 
@@ -10,10 +12,17 @@ So ```idx=x+y*ncols```, or other way round: ```x=idx%ncols; y=idx%nrows```
 "grid" = [[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[1,2],[1,3],[2,0],[2,1],[2,0],[1,0],[1,2],[1,2],[0,0],[1,0],[1,1],[1,0],[1,3],[4,0],[2,0],[1,3],[1,1],[1,3],[0,0],[1,3],[1,2],[1,3],[1,1],[1,1],[2,0],[1,3],[3,3],[2,0],[3,3],[3,0],[5,0],[0,0],[2,1],[2,1],[2,0],[2,1],[3,1],[3,2],[3,1],[3,3],[3,0],[3,1],[3,1],[3,0],[2,1],[2,0],[3,3],[3,2],[3,1],[1,1],[1,3],[3,2],[3,3],[3,2] ...
 ```
 
+## block
+
 The following tells us what the two elements in each grid cell mean (as before). We don't care about rotation right now.
 "header/block" = ["type","rotation"]
 
+### type mapping
+
 Consequently, the first number in each grid cell defines it's type as an array index of the following list of occuring types (excerpt). This list is automatically updated by the front-end, if an unseen property combination occurs. The order of elements is arbitrary and depends on the user input.
+
+### edge cases
+
 Some cases should not happen, which we have to catch in the front-end and possibly modules, i.e.:
 
 ```type[idx] = {}``` this showed up sometimes in our mapping. I'm not quite sure yet, how and why :P
@@ -23,6 +32,8 @@ Some cases should not happen, which we have to catch in the front-end and possib
 ```type[idx]["bld_useGround"] = null``` null values are a bit of an issue when parsing goes wrong. We try to make the user unable to input this, but modules should implement robust array access. ```type[idx]["bld_useUpper"] = null on the other hand is expected, when a building has only one level.
 
 ```type[idx]["bld_numLevels"] == 0``` This makes no sense, of course. We try to make this impossible via the front-end. So far this only immediately affects the noise module.
+
+### sample mapping
 
 ```json
 "header/mapping/type" = [{
@@ -82,6 +93,8 @@ Some cases should not happen, which we have to catch in the front-end and possib
 	"type": "open_space"
 }
 ```
+
+## sample code
 
 Some sample [code](https://github.com/grasbrook-cityscope/pyGraKPI) on how to work with this in python:
 
