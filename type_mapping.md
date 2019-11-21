@@ -1,7 +1,10 @@
 ## Current data format for cityIO as used in CSL
 
 Grid is an array (number of elements = "header/spatial/ncols" * "header/spatial/nrows".
-In our case 72 * 48 right now) of 2-element-arrays. Starting from the top-left, increasing along a single row, then iterating. the column. So idx=x+y*ncols, or other way round: x=idx%ncols, y=idx%nrows
+
+In our case 72 * 48 right now) of 2-element-arrays. Starting from the top-left, increasing along a single row, then iterating. the column.
+
+So ```idx=x+y*ncols```, or other way round: ```x=idx%ncols; y=idx%nrows```
 
 ```json
 "grid" = [[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[1,2],[1,3],[2,0],[2,1],[2,0],[1,0],[1,2],[1,2],[0,0],[1,0],[1,1],[1,0],[1,3],[4,0],[2,0],[1,3],[1,1],[1,3],[0,0],[1,3],[1,2],[1,3],[1,1],[1,1],[2,0],[1,3],[3,3],[2,0],[3,3],[3,0],[5,0],[0,0],[2,1],[2,1],[2,0],[2,1],[3,1],[3,2],[3,1],[3,3],[3,0],[3,1],[3,1],[3,0],[2,1],[2,0],[3,3],[3,2],[3,1],[1,1],[1,3],[3,2],[3,3],[3,2] ...
