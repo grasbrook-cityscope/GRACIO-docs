@@ -1,7 +1,7 @@
+## Current data format for cityIO as used in CSL
 
-Current data format for cityIO as used in CSL.
-
-Grid is an array (number of elements = "header/spatial/ncols" * "header/spatial/nrows". In our case 72*48 right now) of 2-element-arrays. Starting from the top-left, increasing along a single row, then iterating. the column. So idx=x+y*ncols, or other way round: x=idx%ncols, y=idx%nrows
+Grid is an array (number of elements = "header/spatial/ncols" * "header/spatial/nrows".
+In our case 72 * 48 right now) of 2-element-arrays. Starting from the top-left, increasing along a single row, then iterating. the column. So idx=x+y*ncols, or other way round: x=idx%ncols, y=idx%nrows
 
 ```json
 "grid" = [[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[1,2],[1,3],[2,0],[2,1],[2,0],[1,0],[1,2],[1,2],[0,0],[1,0],[1,1],[1,0],[1,3],[4,0],[2,0],[1,3],[1,1],[1,3],[0,0],[1,3],[1,2],[1,3],[1,1],[1,1],[2,0],[1,3],[3,3],[2,0],[3,3],[3,0],[5,0],[0,0],[2,1],[2,1],[2,0],[2,1],[3,1],[3,2],[3,1],[3,3],[3,0],[3,1],[3,1],[3,0],[2,1],[2,0],[3,3],[3,2],[3,1],[1,1],[1,3],[3,2],[3,3],[3,2] ...
@@ -12,10 +12,14 @@ The following tells us what the two elements in each grid cell mean (as before).
 
 Consequently, the first number in each grid cell defines it's type as an array index of the following list of occuring types (excerpt). This list is automatically updated by the front-end, if an unseen property combination occurs. The order of elements is arbitrary and depends on the user input.
 Some cases should not happen, which we have to catch in the front-end and possibly modules, i.e.:
-```type[idx] = {}``` # this showed up sometimes in our mapping. I'm not quite sure yet, how and why :P
-```type[idx]["type"] == "building" && "str_bike" in type[idx]``` # or any other combination of properties of two disjunct types. Modules should be able to be agnostic about the possible combinations and jsut look for all cell with relevant information for their case. E.g. the noise module uses all cells with ```type[idx]["type"] == "building"``` and a module that calculates car traffic only cells with ```type[idx]["str_numLanes"] > 0```.
-```type[idx]["bld_useGround"] = null``` # null values are a bit of an issue when parsing goes wrong. We try to make the user unable to input this, but modules should implement robust array access. ```type[idx]["bld_useUpper"] = null on the other hand is expected, when a building has only one level.
-```type[idx]["bld_numLevels"] == 0``` # This makes no sense, of course. We try to make this impossible via the front-end. So far this only immediately affects the noise module.
+
+```type[idx] = {}``` this showed up sometimes in our mapping. I'm not quite sure yet, how and why :P
+
+```type[idx]["type"] == "building" && "str_bike" in type[idx]``` or any other combination of properties of two disjunct types. Modules should be able to be agnostic about the possible combinations and jsut look for all cell with relevant information for their case. E.g. the noise module uses all cells with ```type[idx]["type"] == "building"``` and a module that calculates car traffic only cells with ```type[idx]["str_numLanes"] > 0```.
+
+```type[idx]["bld_useGround"] = null``` null values are a bit of an issue when parsing goes wrong. We try to make the user unable to input this, but modules should implement robust array access. ```type[idx]["bld_useUpper"] = null on the other hand is expected, when a building has only one level.
+
+```type[idx]["bld_numLevels"] == 0``` This makes no sense, of course. We try to make this impossible via the front-end. So far this only immediately affects the noise module.
 
 ```json
 "header/mapping/type" = [{
