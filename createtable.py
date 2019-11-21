@@ -2,10 +2,23 @@ import requests
 import json
 import urllib
 
-def getCurrentState(fromwhere):
-    with urllib.request.urlopen(fromwhere) as url:
-        return json.loads(url.read().decode())
-    return None
+def getCurrentState(fromwhere, auth=False):
+    if auth:
+        get_address = fromwhere
+        r = requests.get(get_address, headers={'Content-Type': 'application/json', 'Authorization': 'Bearer cb99e47b61de5b27f45d86420a84fb0e54a4e0cfbd7091f487e235b1ef54408c'})
+        print(r)
+        if not r.status_code == 200:
+            print("could not get from cityIO")
+            print("Error code", r.status_code)
+        else:
+            print("Successfully got from cityIO", r.status_code)
+
+        return r.json()
+    else:
+        with urllib.request.urlopen(fromwhere) as url:
+            return json.loads(url.read().decode())
+        return None
+
 
 def read_json_file(settings_file):
         # open json file
@@ -13,11 +26,14 @@ def read_json_file(settings_file):
             data = json.load(d)
         return(data)
 
-def send_json_to_cityIO(cityIO_json, name):
+def send_json_to_cityIO(cityIO_json, name, auth=False):
         # defining the api-endpoint
         post_address = "https://cityio.media.mit.edu/api/table/update/" + name
 
-        r = requests.post(post_address, json=cityIO_json, headers={'Content-Type': 'application/json'})
+        if auth:
+            r = requests.post(post_address, json=cityIO_json, headers={'Content-Type': 'application/json', 'Authorization': 'Bearer cb99e47b61de5b27f45d86420a84fb0e54a4e0cfbd7091f487e235b1ef54408c'})
+        else:
+            r = requests.post(post_address, json=cityIO_json, headers={'Content-Type': 'application/json'})
         print(r)
         if not r.status_code == 200:
             print("could not post result to cityIO")
@@ -72,8 +88,8 @@ def fill_grid(name,value = [0,0]):
         print("Successfully posted to cityIO", r.status_code)
 
 
-def change_header(name, field, value):
-    header = getCurrentState("https://cityio.media.mit.edu/api/table/"+name+"/header")
+def change_header(name, field, value, auth=False):
+    header = getCurrentState("https://cityio.media.mit.edu/api/table/"+name+"/header", auth)
     post_address = "https://cityio.media.mit.edu/api/table/update/" + name + "/header"
 
     fields = field.split("/")
@@ -86,7 +102,10 @@ def change_header(name, field, value):
         header[fields[0]][fields[1]][fields[2]] = value
 
     # print(header)
-    r = requests.post(post_address, json=header, headers={'Content-Type': 'application/json'})
+    if auth:
+        r = requests.post(post_address, json=header, headers={'Content-Type': 'application/json', 'Authorization': 'Bearer cb99e47b61de5b27f45d86420a84fb0e54a4e0cfbd7091f487e235b1ef54408c'})
+    else:
+        r = requests.post(post_address, json=header, headers={'Content-Type': 'application/json'})
     print(r)
     if not r.status_code == 200:
         print("could not post result to cityIO")
@@ -127,17 +146,23 @@ if __name__ == "__main__":
     
     # grid in front-end: 78*44
     # change_header("grasbrook_test","spatial/ncols",78)
-    # change_header("grasbrook_test","spatial/nrows",43)
+    # change_header("grasbrook_test","spatial/nrows",44)
 
     # fill_grid("grasbrook_test")
 
-    # upper left corner of grid in front-end: 53.53764806145533 10.00736954095224
-    # change_header("grasbrook_test","spatial/latitude",53.53764806145533)
-    # change_header("grasbrook_test","spatial/longitude",10.00736954095224)
+    # upper left corner of grid in front-end: 53.537894345976795 10.00677491086256
+    # change_header("grasbrook_test","spatial/latitude",53.537894345976795)
+    # change_header("grasbrook_test","spatial/longitude",10.00677491086256)
     # bottom right corner of grid in front-end 53.526354, 10.016304
     # change_header("grasbrook_test","spatial/latitude",53.526354)
     # change_header("grasbrook_test","spatial/longitude",10.016304)
+    # change_header("grasbrook_test","spatial/rotation",326)
     
     # change_grid("grasbrook_test")
+
+    # send_json_to_cityIO([],"hidden_table/grid",True)
+    # change_header("hidden_table","spatial",{"cellSize":16,"ncols":10,"nrows":10},True)
+    # change_header("hidden_table","mapping",{"type":[]},True)
+    # change_header("hidden_table","block",["type","rotation"],True)
 
 
