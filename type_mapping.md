@@ -15,7 +15,7 @@ So ```idx=x+y*ncols```, or other way round: ```x=idx%ncols; y=idx%nrows```
 ## block
 
 The following tells us what the two elements in each grid cell mean (as before). We don't care about rotation right now.
-"header/block" = ["type","rotation"]
+```"header/block" = ["type","rotation"]```
 
 ### type mapping
 
