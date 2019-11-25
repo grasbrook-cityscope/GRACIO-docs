@@ -115,50 +115,37 @@ def change_header(name, field, value, auth=False):
 
 
 if __name__ == "__main__":
+    endpoint = "grasbrook_test"
+
     # data = read_json_file("sampletable.json")
-
+    # rows = 44
+    # cols = 78
     # print(data["header"])
+    # data["grid"] = [[0,0]]*(rows*cols)
+    # print((data["grid"]))
 
-    # send_json_to_cityIO(data,"grasbrook_test")
-    mapping = [
-        {"type":"empty"},
-        {"str_bike":True,"str_elevator":False,"str_numLanes":0,"str_ramp":False,"str_speed":50,"str_stairs":True,"type":"street"},
-        {"bld_numLevels":14,"bld_useGround":"commercial","bld_useUpper":"office","type":"building"},
-        {"os_type":"green_space","type":"open_space"},
-        {"str_bike":True,"str_elevator":False,"str_numLanes":2,"str_ramp":False,"str_speed":50,"str_stairs":False,"type":"street"},
-        {"bld_numLevels":19,"bld_useGround":"residential","bld_useUpper":"residential","type":"building"},
-        {"bld_numLevels":11,"bld_useGround":"residential","bld_useUpper":"residential","type":"building"},
-        {"bld_numLevels":0,"bld_useGround":"residential","bld_useUpper":"residential","type":"building"},
-        {"bld_numLevels":9,"bld_useGround":"residential","bld_useUpper":"residential","type":"building"},
-        {"bld_numLevels":0,"bld_useGround":"office","bld_useUpper":"office","type":"building"},
-        # {"bld_numLevels":0,"bld_useGround":null,"bld_useUpper":null,"type":"building"},
-        {"bld_numLevels":51,"bld_useGround":"commercial","bld_useUpper":"commercial","type":"building"},
-        {"bld_numLevels":30,"bld_useGround":"commercial","bld_useUpper":"office","type":"building"},
-        # {"bld_numLevels":12,"bld_useGround":null,"bld_useUpper":"office","type":"building"},
-        # {"bld_numLevels":1,"bld_useGround":null,"bld_useUpper":"office","type":"building"},
-        # {"bld_numLevels":1,"bld_useGround":"residential","bld_useUpper":null,"type":"building"},
-        {"os_type":"water","type":"open_space"},
-        # {},
-        {"str_bike":False,"str_elevator":False,"str_numLanes":2,"str_ramp":False,"str_speed":50,"str_stairs":False,"type":"street"},
-        {"bld_numLevels":34,"bld_useGround":"office","bld_useUpper":"office","type":"building"}]
+    # send_json_to_cityIO(data,endpoint)
+    # change_header(endpoint,"name",endpoint)
+
+    # mapping = [{"type":"empty"}]
     
-    # change_header("grasbrook_test","mapping/type",mapping)
+    # change_header(endpoint,"mapping/type",mapping)
     
     # grid in front-end: 78*44
-    # change_header("grasbrook_test","spatial/ncols",78)
-    # change_header("grasbrook_test","spatial/nrows",44)
+    # change_header(endpoint,"spatial/ncols",cols)
+    # change_header(endpoint,"spatial/nrows",rows)
 
-    # fill_grid("grasbrook_test")
+    # fill_grid(endpoint)
 
     # upper left corner of grid in front-end: 53.537894345976795 10.00677491086256
-    # change_header("grasbrook_test","spatial/latitude",53.537894345976795)
-    # change_header("grasbrook_test","spatial/longitude",10.00677491086256)
+    # change_header(endpoint,"spatial/latitude",53.537894345976795)
+    # change_header(endpoint,"spatial/longitude",10.00677491086256)
     # bottom right corner of grid in front-end 53.526354, 10.016304
-    # change_header("grasbrook_test","spatial/latitude",53.526354)
-    # change_header("grasbrook_test","spatial/longitude",10.016304)
-    # change_header("grasbrook_test","spatial/rotation",326)
+    # change_header(endpoint,"spatial/latitude",53.526354)
+    # change_header(endpoint,"spatial/longitude",10.016304)
+    # change_header(endpoint,"spatial/rotation",326)
     
-    # change_grid("grasbrook_test")
+    # change_grid(endpoint)
 
     # send_json_to_cityIO([],"hidden_table/grid",True)
     # change_header("hidden_table","spatial",{"cellSize":16,"ncols":10,"nrows":10},True)

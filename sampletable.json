@@ -107,33 +107,7 @@
 			"rotation": ["0", "1", "2", "3", "4"],
 			"type": [
                 {
-                    "type" : "street",
-                    "str_numlanes" : 2
-                },
-                {
-                    "type" : "building",
-                    "bld_use" : "residential",
-                    "bld_numlevels" : 4
-                },
-                {
-                    "type" : "building",
-                    "bld_use" : "residential",
-                    "bld_numlevels" : 6
-                },
-                {
-                    "type" : "building",
-                    "bld_use" : "commercial",
-                    "bld_numlevels" : 6
-                },
-                {
-                    "type" : "building",
-                    "bld_use" : "commercial",
-                    "bld_numlevels" : 4
-                },
-                {
-                    "type" : "building",
-                    "bld_use" : "commercial",
-                    "bld_numlevels" : 5
+                    "type" : "empty"
                 }
             ]
 		},
