@@ -113,11 +113,51 @@ def change_header(name, field, value, auth=False):
     else:
         print("Successfully posted to cityIO", r.status_code)
 
+def clean_mapping(name, auth=False):
+    header = getCurrentState("https://cityio.media.mit.edu/api/table/"+name+"/header", auth)
+    post_address = "https://cityio.media.mit.edu/api/table/update/" + name + "/header"
+
+    types = header["mapping"]["type"]
+
+    idx = 0
+    rmlist = []
+    for el in types:
+        # print(el)
+        if "bld_useGround" in el and el["bld_useGround"] == None:
+            print(el)
+            rmlist.append(idx)
+        elif "bld_useUpper" in el and el["bld_useUpper"] == None and el["bld_numLevels"] > 1:
+            print(el)
+            rmlist.append(idx)
+        elif "bld_numLevels" in el and el["bld_numLevels"] > 20:
+            print(el)
+            rmlist.append(idx)
+        elif "bld_numLevels" in el and el["bld_numLevels"] == 0:
+            print(el)
+            rmlist.append(idx)
+        idx+=1
+
+    for it in reversed(rmlist):
+        del header["mapping"]["type"][it]
+            
+
+    print(types)
+    if auth:
+        r = requests.post(post_address, json=header, headers={'Content-Type': 'application/json', 'Authorization': 'Bearer cb99e47b61de5b27f45d86420a84fb0e54a4e0cfbd7091f487e235b1ef54408c'})
+    else:
+        r = requests.post(post_address, json=header, headers={'Content-Type': 'application/json'})
+    print(r)
+    if not r.status_code == 200:
+        print("could not post result to cityIO")
+        print("Error code", r.status_code)
+    else:
+        print("Successfully posted to cityIO", r.status_code)
 
 if __name__ == "__main__":
     endpoint = "grasbrook_test"
 
     # data = read_json_file("sampletable.json")
+    # grid in front-end: 78*44
     # rows = 44
     # cols = 78
     # print(data["header"])
@@ -131,11 +171,11 @@ if __name__ == "__main__":
     
     # change_header(endpoint,"mapping/type",mapping)
     
-    # grid in front-end: 78*44
     # change_header(endpoint,"spatial/ncols",cols)
     # change_header(endpoint,"spatial/nrows",rows)
 
-    # fill_grid(endpoint)
+    clean_mapping(endpoint)
+    fill_grid(endpoint)
 
     # upper left corner of grid in front-end: 53.537894345976795 10.00677491086256
     # change_header(endpoint,"spatial/latitude",53.537894345976795)
