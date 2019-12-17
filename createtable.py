@@ -153,13 +153,30 @@ def clean_mapping(name, auth=False):
     else:
         print("Successfully posted to cityIO", r.status_code)
 
+def new_grid(name, size, value = [0,0]):
+    grid = getCurrentState("https://cityio.media.mit.edu/api/table/"+name+"/grid")
+    post_address = "https://cityio.media.mit.edu/api/table/update/" + name + "/grid"
+
+    grid = [value] * size
+    print(grid)
+    print(len(grid))
+
+    r = requests.post(post_address, json=grid, headers={'Content-Type': 'application/json'})
+    print(r)
+    if not r.status_code == 200:
+        print("could not post result to cityIO")
+        print("Error code", r.status_code)
+    else:
+        print("Successfully posted to cityIO", r.status_code)
+
+
 if __name__ == "__main__":
-    endpoint = "grasbrook_test"
+    endpoint = "grasbrook_"
 
     # data = read_json_file("sampletable.json")
     # grid in front-end: 78*44
-    # rows = 44
-    # cols = 78
+    rows = 70
+    cols = 78
     # print(data["header"])
     # data["grid"] = [[0,0]]*(rows*cols)
     # print((data["grid"]))
@@ -174,8 +191,11 @@ if __name__ == "__main__":
     # change_header(endpoint,"spatial/ncols",cols)
     # change_header(endpoint,"spatial/nrows",rows)
 
-    clean_mapping(endpoint)
-    fill_grid(endpoint)
+    # clean_mapping(endpoint)
+    # fill_grid(endpoint)
+    
+    # new_grid(endpoint,rows*cols)
+    # change_header(endpoint,"user","mediterranean")
 
     # upper left corner of grid in front-end: 53.537894345976795 10.00677491086256
     # change_header(endpoint,"spatial/latitude",53.537894345976795)
